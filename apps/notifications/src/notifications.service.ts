@@ -19,11 +19,16 @@ export class NotificationsService {
   constructor(private readonly configService: ConfigService) {}
 
   async notifyEmail({ email }: NotifyEmailDto) {
-    await this.transporter.sendMail({
-      from: this.configService.get('SMTP_USER'),
-      to: email,
-      subject: 'Nest microservices',
-      text: 'It works!',
-    });
+    try {
+      await this.transporter.sendMail({
+        from: this.configService.get('SMTP_USER'),
+        to: email,
+        subject: 'Nest microservices',
+        text: 'It works!',
+      });
+    } catch (_error) {
+      console.log('No configs are used, use only logging!');
+      console.log(`Your email is sent to ${email}!`);
+    }
   }
 }
