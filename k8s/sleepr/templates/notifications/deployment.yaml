@@ -17,3 +17,8 @@ spec:
       containers:
       - image: docker.io/draakan/microservice-notifications
         name: notifications
+        env:
+          - name: PORT
+            value: '3000'
+        ports:
+          - containerPort: 3000
